@@ -1,0 +1,27 @@
+body {
+    background-image: url(./images/rps.jpg);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 16px;
+}
+
+button {
+    border-radius: 10px;
+    border-color: white;
+    background-color: white;
+    padding: 8px;
+    box-shadow: 0 0 1rem #ffc600;
+}
+
+button {
+    color: black;
+    font-size: 48px;
+}
