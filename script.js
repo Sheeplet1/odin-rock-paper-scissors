@@ -1,12 +1,36 @@
-function getComputerChoice() {
-    let options = ["rock", "paper", "scissors"]
-    // returns a random option
-    return options[Math.floor(Math.random() * 3)]
+let computerScore = 0
+let playerScore = 0
+
+let playerChoice = ''
+document.querySelector('#rock').onclick = function() {
+    playerChoice = 'rock';
+    playRound(playerChoice)
+}
+document.querySelector('#paper').onclick = function() {
+    playerChoice = 'paper';
+    playRound(playerChoice)
+}
+document.querySelector('#scissors').onclick = function() {
+    playerChoice = 'scissors';
+    playRound(playerChoice)
 }
 
-function getPlayerChoice() {
-    let input = prompt("Rock, Paper, or Scissors?")
-    return input
+document.querySelector('#finishGame').onclick = function() {
+    if (computerScore > playerScore) {
+        console.log("You Lost!")
+    } else if (playerScore > computerScore) {
+        console.log("You Won!")
+    } else {
+        console.log("You Tied!")
+    }
+}
+
+// ----------- HELPER FUNCTIONS --------------------
+
+function getComputerChoice() {
+    // returns a random option for the computer
+    let options = ["rock", "paper", "scissors"]
+    return options[Math.floor(Math.random() * 3)]
 }
 
 // below are the scenarios for each player's moves
@@ -49,8 +73,10 @@ function scissorsOutcomes(playerChoice) {
 }
 
 // plays a single ronnd of rock, paper, scissors
-function playRound(computerChoice, playerChoice) {
+function playRound(playerChoice) {
     let outcome = false;
+    let computerChoice = getComputerChoice();
+
     if (computerChoice == 'rock') {
         outcome = rockOutcomes(playerChoice);
     } else if (computerChoice == 'paper') {
@@ -58,43 +84,12 @@ function playRound(computerChoice, playerChoice) {
     } else {
         outcome = scissorsOutcomes(playerChoice);
     }
-    return outcome
-}
 
-// main game function
-function game() {
-    let computerScore = 0
-    let playerScore = 0
-
-    for (let i = 0; i < 5; i++) {
-        let computerChoice = getComputerChoice();
-        let playerChoice = getPlayerChoice();
-        let outcome = playRound(computerChoice, playerChoice);
-        if (outcome == undefined) {
-            continue
-        } else if (outcome == true) {
-            playerScore++
-        } else {
-            computerScore++
-        }
-    }
-
-    console.log("Player's Score: " + playerScore)
-    console.log("Computer's Score: " + computerScore)
-    if (playerScore > computerScore) {
-        console.log("You won!")
-    } else if (computerScore > playerScore) {
-        console.log("You lost!")
+    if (outcome == undefined) {
+        return;
+    } else if (outcome == true) {
+        playerScore++;
     } else {
-        console.log("You tied!")
+        computerScore++;
     }
 }
-
-// Player Button Options
-const options = document.querySelectorAll('#playerOption');
-
-options.forEach((option) => {
-    option.addEventListener('click', () => {
-        console.log("hello")
-    });
-});
